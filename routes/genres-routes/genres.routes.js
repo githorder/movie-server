@@ -11,5 +11,7 @@ const genresRouter = new Router();
 
 genresRouter.get('/genres', getGenresController);
 genresRouter.post('/genres', postGenresController);
+genresRouter.put('/genres', () => {});
+genresRouter.delete('/genres', () => {});
 
 module.exports = genresRouter;
