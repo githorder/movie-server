@@ -6,12 +6,18 @@ const {
 const {
   postMoviesController,
 } = require('../../controllers/movies-controllers/post-movies.controller.js');
+const {
+  updateMoviesController,
+} = require('../../controllers/movies-controllers/put-movies.controller.js');
+const {
+  deleteMoviesController,
+} = require('../../controllers/movies-controllers/delete-movies.controller.js');
 
 const moviesRouter = new Router();
 
 moviesRouter.get('/movies', getMoviesController);
 moviesRouter.post('/movies', postMoviesController);
-moviesRouter.put('/movies', () => {});
-moviesRouter.delete('/movies', () => {});
+moviesRouter.put('/movies', updateMoviesController);
+moviesRouter.delete('/movies', deleteMoviesController);
 
 module.exports = moviesRouter;

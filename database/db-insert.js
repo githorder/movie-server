@@ -1,8 +1,8 @@
 const knex = require('./db.js');
 
-const insertInto = async (table, data) => {
+const insertInto = async (table, data, selectArr = ['*']) => {
   try {
-    return await knex(table).insert(data);
+    return await knex(table).insert(data, selectArr);
   } catch (err) {
     throw err;
   }
