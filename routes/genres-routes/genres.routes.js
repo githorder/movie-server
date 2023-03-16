@@ -6,12 +6,18 @@ const {
 const {
   postGenresController,
 } = require('../../controllers/genres-controllers/post-genres.controller.js');
+const {
+  updateGenresController,
+} = require('../../controllers/genres-controllers/put-genres.controller.js');
+const {
+  deleteGenresController,
+} = require('../../controllers/genres-controllers/delete-genres.controller.js');
 
 const genresRouter = new Router();
 
 genresRouter.get('/genres', getGenresController);
 genresRouter.post('/genres', postGenresController);
-genresRouter.put('/genres', () => {});
-genresRouter.delete('/genres', () => {});
+genresRouter.put('/genres', updateGenresController);
+genresRouter.delete('/genres', deleteGenresController);
 
 module.exports = genresRouter;

@@ -1,15 +1,38 @@
 const knex = require('./db.js');
 
-const selectAll = async (table) => knex(table);
-const selectAllWhere = async (table, whereObj) => knex(table).where(whereObj);
+const selectAll = async (table) => {
+  try {
+    return await knex(table);
+  } catch (err) {
+    throw err;
+  }
+};
 
-const select = async (table, selectArr) =>
-  knex.from(table).select(...selectArr);
+const selectAllWhere = async (table, whereObj) => {
+  try {
+    return await knex(table).where(whereObj);
+  } catch (err) {
+    throw err;
+  }
+};
 
-const selectWhere = async (table, selectArr, whereObj) =>
-  knex
-    .from(table)
-    .select(...selectArr)
-    .where(whereObj);
+const select = async (table, selectArr) => {
+  try {
+    return await knex.from(table).select(...selectArr);
+  } catch (err) {
+    throw err;
+  }
+};
+
+const selectWhere = async (table, selectArr, whereObj) => {
+  try {
+    return await knex
+      .from(table)
+      .select(...selectArr)
+      .where(whereObj);
+  } catch (err) {
+    throw err;
+  }
+};
 
 module.exports = { select, selectAll, selectAllWhere, selectWhere };

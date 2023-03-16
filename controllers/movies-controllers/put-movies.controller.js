@@ -3,21 +3,30 @@ const { updateWhere } = require('../../database/db-update.js');
 const updateMoviesController = async (req, res) => {
   try {
     if (req.params.id) {
-      const newData = req.body;
-      const updatedMovies = await updateWhere(
-        'movie',
-        {
-          id: req.params.id,
-        },
-        newData,
-        ['id', 'title', 'release_year']
-      );
+      const { title, release_year } = req.body;
 
-      if (!updatedMovies.length) {
-        return res.sendClientErrorJson({ message: 'Such id does not exist' });
+      if (title && release_year) {
+        const updatedMovie = (
+          await updateWhere(
+            'movie',
+            {
+              id: req.params.id,
+            },
+            { title, release_year },
+            ['id', 'title', 'release_year']
+          )
+        )[0];
+
+        if (!updatedMovie) {
+          return res.sendClientErrorJson({ message: 'Such id does not exist' });
+        }
+      } else {
+        return res.sendClientErrorJson({
+          message: 'title and release_year are required',
+        });
       }
 
-      return res.json(updatedMovies[0]);
+      return res.json(updatedMovie);
     } else {
       res.sendClientErrorJson({
         message: 'You should provide the id of the movie to update',
